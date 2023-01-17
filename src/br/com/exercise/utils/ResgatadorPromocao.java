@@ -17,23 +17,23 @@ public class ResgatadorPromocao {
 	public static List<Promocao> resgatar() throws IOException {
 		List<Promocao> list = new ArrayList<>();
 
-		try (Scanner sc = new Scanner(new File("detalhes_promocao.csv"), StandardCharsets.UTF_8)) {
+		try (Scanner scanner = new Scanner(new File("detalhes_promocao.csv"), StandardCharsets.UTF_8)) {
 
-			sc.nextLine();
-			while (sc.hasNextLine()) {
-				String linha = sc.nextLine();
+			scanner.nextLine();
+			while (scanner.hasNextLine()) {
+				String linha = scanner.nextLine();
 
-				Scanner scanner = new Scanner(linha);
-				scanner.useLocale(Locale.US);
-				scanner.useDelimiter(";");
+				Scanner scannerDelimiter = new Scanner(linha);
+				scannerDelimiter.useLocale(Locale.US);
+				scannerDelimiter.useDelimiter(";");
 
-				String tipo = scanner.next();
-				LocalDate dataInicio = LocalDate.parse(scanner.next());
-				LocalDate dataFim = LocalDate.parse(scanner.next());
-				int porcentagem = scanner.nextInt();
+				String tipo = scannerDelimiter.next();
+				LocalDate dataInicio = LocalDate.parse(scannerDelimiter.next());
+				LocalDate dataFim = LocalDate.parse(scannerDelimiter.next());
+				int porcentagem = scannerDelimiter.nextInt();
 
 				list.add(new Promocao(tipo, dataInicio, dataFim, porcentagem));
-				scanner.close();
+				scannerDelimiter.close();
 			}
 
 		}

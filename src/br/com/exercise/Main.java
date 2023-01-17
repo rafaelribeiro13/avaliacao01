@@ -21,18 +21,21 @@ public class Main {
 		Locale.setDefault(Locale.US);
 		Catalogo catalogo = new Catalogo();
 		
-		try (Scanner sc = new Scanner(new File("livros.csv"), StandardCharsets.UTF_8)) {
+		try (Scanner scanner = new Scanner(new File("livros.csv"), StandardCharsets.UTF_8)) {
 			
 			List<Promocao> list = ResgatadorPromocao.resgatar();
 			
-			sc.nextLine();
-			while (sc.hasNextLine()) {
+			scanner.nextLine();
+			while (scanner.hasNextLine()) {
 					
-					String linha = sc.nextLine();
+					String linha = scanner.nextLine();
 					Livro livro = instanciarLivro(linha, list);
 					catalogo.adicionar(livro);
 					
 			}
+			
+			catalogo.exibirLivros();
+			catalogo.gerarRelatorio();
 			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -40,7 +43,7 @@ public class Main {
 			e.printStackTrace();
 		}
 		
-		catalogo.exibirLivros();
+		
 		
 	}
 
@@ -56,6 +59,7 @@ public class Main {
 		
 		scanner.close();
 
+		// recuperando promocao
 		Promocao promo = list.stream()
 				.filter(item -> item.getTipo().equals(tipoPromocao))
 				.toList().get(0);
