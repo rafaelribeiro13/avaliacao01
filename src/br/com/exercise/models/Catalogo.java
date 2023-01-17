@@ -45,8 +45,8 @@ public class Catalogo {
 					, porcentagem, dataInicio, dataFim});
 		}
 		
-		String dataAtual = LocalDateTime.now().toString().replaceAll("\\:", "\\.");
-        Writer writer = Files.newBufferedWriter(Paths.get("relatorio_final_" + dataAtual + ".csv"), StandardCharsets.UTF_8);
+		String dataAtual = LocalDateTime.now().toString().replaceAll("[^a-z A-Z 0-9]", "");
+        Writer writer = Files.newBufferedWriter(Paths.get("relatoriofinal_" + dataAtual + ".csv"), StandardCharsets.UTF_8);
       
         try (CSVWriter csvWriter = new CSVWriter(writer)) {
 			csvWriter.writeNext(cabecalho);
